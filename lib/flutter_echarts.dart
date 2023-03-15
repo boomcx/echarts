@@ -153,7 +153,7 @@ class _EchartsState extends State<Echarts> {
     return set;
   }
 
-  void update(String preOption, String dispatch) async {
+  void update(String preOption) async {
     _curOptionJs = widget.option;
     if (_curOptionJs != preOption) {
       await _controller.runJavaScript('''
