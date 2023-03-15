@@ -23,6 +23,7 @@ class Echarts extends StatefulWidget {
       this.extraScript = '',
       this.onMessage,
       this.extensions = const [],
+      this.notMerge = true,
       this.theme,
       this.captureAllGestures = false,
       this.captureHorizontalGestures = false,
@@ -41,6 +42,9 @@ class Echarts extends StatefulWidget {
   final List<String> extensions;
 
   final String? theme;
+
+  /// 指定更新模式
+  final bool notMerge;
 
   final bool captureAllGestures;
 
@@ -158,7 +162,7 @@ class _EchartsState extends State<Echarts> {
     if (_curOptionJs != preOption) {
       await _controller.runJavaScript('''
         try {
-          chart.setOption($_curOptionJs, true);
+          chart.setOption($_curOptionJs, ${widget.notMerge});
         } catch(e) {
         }
       ''');
