@@ -168,6 +168,7 @@ class _EchartsState extends State<Echarts> {
   @override
   void didUpdateWidget(Echarts oldWidget) {
     super.didUpdateWidget(oldWidget);
+    update(oldWidget.option);
   }
 
   @override
