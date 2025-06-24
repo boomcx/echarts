@@ -157,11 +157,12 @@ class _EchartsState extends State<Echarts> {
     return set;
   }
 
-  void update(String preOption) async {
+  void update(String preOption, String preExtra) async {
     _curOptionJs = widget.option;
-    if (_curOptionJs != preOption) {
+    if (_curOptionJs != preOption || widget.extraScript != preExtra) {
       await _controller.runJavaScript('''
         try {
+          ${widget.extraScript}
           chart.setOption($_curOptionJs, ${widget.notMerge});
         } catch(e) {
         }
@@ -172,7 +173,7 @@ class _EchartsState extends State<Echarts> {
   @override
   void didUpdateWidget(Echarts oldWidget) {
     super.didUpdateWidget(oldWidget);
-    update(oldWidget.option);
+    update(oldWidget.option, oldWidget.extraScript);
   }
 
   @override
